@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace YoukaiFox.Parallax
 {
-    public class ParallaxBackgroundElement : ParallaxElement
+    public class ParallaxForegroundElement : ParallaxElement
     {
         #region Serialized fields
         #endregion
@@ -17,6 +19,6 @@ namespace YoukaiFox.Parallax
         #endregion
 
         #region Private methods
-        #endregion
+        #endregion    
     }
 }
