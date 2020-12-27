@@ -2,27 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using YoukaiFox.Math;
 
 namespace YoukaiFox.Parallax
 {
-    
-    public class ParallaxFloatingElement : ParallaxElement
+    public class ParallaxMovingElement : ParallaxLayeredElement
     {
         #region Serialized fields
         [BeginGroup("Additional values")]
         [SerializeField]
-        private FloatingPattern _floatingPattern;
+        private MovingPattern _movingPattern;
 
-        [SerializeField] [ShowIf(nameof(IsLinear), true)]
-        private Direction.Directions _linearMovementDirection;
-
-        // [SerializeField] [LeftToggle]
-        // private bool _movesWhenCameraIsStationary = false;
+        [SerializeField] [ShowIf(nameof(IsRandom), false)]
+        private Direction.Directions _movementDirection;
 
         [SerializeField]
-        private float _maxFloatDistance = 0.25f;
+        private float _randomnessStrength = 0.25f;
 
-        [SerializeField] [Range(0f, 1f)] 
+        [SerializeField]
         private float _movementSpeed = 0.5f;
 
         [EndGroup] [SerializeField] [LeftToggle]
@@ -32,13 +29,19 @@ namespace YoukaiFox.Parallax
         #region Non-serialized fields
 
         private Tween _floatingTween;
-        private bool IsLinear => _floatingPattern == FloatingPattern.Linear;
+        private System.Random _random;
+        #endregion
+
+        #region Properties
+
+        private bool IsLinear => _movingPattern == MovingPattern.Linear;
+        private bool IsRandom => _movingPattern == MovingPattern.Random;
 
         #endregion
 
-        public enum FloatingPattern
+        public enum MovingPattern
         {
-            Static, Random, Linear
+            Random, Linear
         }
 
         #region Unity events
@@ -48,19 +51,7 @@ namespace YoukaiFox.Parallax
         protected override void Initialize()
         {
             base.Initialize();
-
-            if (_floatingPattern == FloatingPattern.Random)
-            {
-                FloatAround();
-            }
-        }
-
-        protected override void LateLoop()
-        {
-            if (_floatingPattern == FloatingPattern.Linear)
-            {
-                MoveLinearly();
-            }
+            _random = new System.Random();
         }
 
         #endregion
@@ -72,16 +63,16 @@ namespace YoukaiFox.Parallax
 
         private void FloatAround()
         {
-            Vector3 randomDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * _maxFloatDistance;
+            Vector3 randomDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * _randomnessStrength;
             randomDirection += InitialPosition;
             _floatingTween = base.Transform.DOMove(randomDirection, 101f - _movementSpeed).SetEase(Ease.InSine).OnComplete(FloatAround);
         }
 
-        private void MoveLinearly()
+        private Vector3 MoveLinearly()
         {
             Vector3 displacement = Vector3.zero;
 
-            switch (_linearMovementDirection)
+            switch (_movementDirection)
             {
                 case Direction.Directions.Right:
                     displacement.x = _movementSpeed * Time.deltaTime;
@@ -99,7 +90,28 @@ namespace YoukaiFox.Parallax
                     break;
             }
 
-            Move(base.Transform.position += displacement);
+            return base.Transform.position += displacement;
+        }
+
+        private Vector3 MoveRandomly()
+        {
+            Vector3 randomDirection = YoukaiMath.GetRandomNormalizedVector2();
+            randomDirection *= _randomnessStrength;
+            randomDirection += InitialPosition;
+            return randomDirection;
+        }
+
+        protected override Vector3 CalculateNextPosition()
+        {
+            switch (_movingPattern)
+            {
+                case MovingPattern.Random:
+                    return MoveRandomly();
+                case MovingPattern.Linear:
+                    return MoveLinearly();
+                default:
+                    throw new System.ArgumentOutOfRangeException();
+            }
         }
 
         #endregion

@@ -1,118 +1,79 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YoukaiFox.Math;
 
 namespace YoukaiFox.Parallax
 {
-    public class ParallaxElement : MonoBehaviour
+    [RequireComponent(typeof(SpriteRenderer))]
+    public abstract class ParallaxElement : MonoBehaviour, IComparable<ParallaxElement>
     {
         #region Serialized Fields
 
-        [BeginGroup("Additional values")]
-        [SerializeField] [LeftToggle]
-        private bool _hardFollow = false;
-
-        [SerializeField] [LeftToggle] [HideIf(nameof(_hardFollow), true)]
-        private bool _lockHorizontalMovement = false;
-
-        [SerializeField] [LeftToggle] [HideIf(nameof(_hardFollow), true)]
-        private bool _lockVerticalMovement = true;
-
-        [SerializeField] [ShowIf(nameof(_lockVerticalMovement), false)] [LeftToggle]
-        private bool _useInitialPositionAsLowestY = true;
-
-        [BeginGroup("Debug")]
-        [SerializeField] [LeftToggle]
-        private bool _debugMode;
-
-        [SerializeField] [LeftToggle]
-        private bool _maintainZPosition = true;
+        [SerializeField] [LeftToggle] [BeginGroup("Constraints")] [EndGroup]
+        private bool _preventMovingBelowInitialPos = true;
 
         #endregion
 
         #region Non-Serialized Fields
-        [SerializeField] [ShowIf(nameof(_debugMode), true)] [LeftToggle]
-        private bool _updateSpeedInPlayMode;
 
-        [SerializeField] [ReadOnlyField] [ShowIf(nameof(_debugMode), true)] [Label("Parallax speed")]
-        private float _speed = 1f;
-
-        [SerializeField] [ReadOnlyField] [ShowIf(nameof(_debugMode), true)] [Label("Initial position")]
-        private Vector3 _initialPosition;
-        [EndGroup]
-        private float _previousZValue;
         private SpriteRenderer _spriteRenderer;
         private Transform _transform;
-        public ParallaxManager _parallaxManager;
+        private Vector3 _initialPosition;
+        private float _previousZValue;
+
         #endregion
 
         #region Properties
+
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
-        public float Speed => _speed;
         public Transform Transform => _transform;
-        public ParallaxManager ParallaxManager => _parallaxManager;
         public Vector3 InitialPosition => _initialPosition;
+
         #endregion
 
         #region Unity Methods
 
         private void Awake() 
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            _transform = transform;
-            _previousZValue = _transform.position.z;
+            ReferenceComponents();
         }
 
         private void Start() 
         {
-            _initialPosition = _transform.position;
-            CalculateSpeed();
             Initialize();
+        }
+
+        private void Update() 
+        {
+            OnUpdateEnter();
         }
 
         private void LateUpdate() 
         {
-            LateLoop();
-        }
-
-        #endregion
-
-        #region Virtual methods
-
-        protected virtual void Initialize()
-        {
-            if (!_parallaxManager)
-            {
-                _parallaxManager = FindObjectOfType<ParallaxManager>();
-
-                if (!_parallaxManager)
-                {
-                    Debug.LogError($"Error! Element {gameObject} is not assigned to a parallax manager!");
-                    return;
-                }
-            }
-
-            if (_hardFollow)
-            {
-                _lockHorizontalMovement = false;
-                _lockVerticalMovement = false;
-                _useInitialPositionAsLowestY = true;
-            }
-        }
-
-        protected virtual void LateLoop()
-        {
-            UpdateSpeed();
-            MoveParallax();
+            OnLateUpdateEnter();
         }
 
         #endregion
 
         #region Public Methods
 
-        public void SetManager(ParallaxManager parallaxManager)
+        public ParallaxLayeredElement.Plane GetPlane()
         {
-            _parallaxManager = parallaxManager;
+            if (GetComponent<ParallaxStaticElement>())
+                return ParallaxLayeredElement.Plane.Background;
+
+            var layeredElement = GetComponent<ParallaxLayeredElement>();
+
+            if (!layeredElement)
+                throw new System.Exception();
+
+            return layeredElement.ElementPlane;
+        }
+
+        public void ChangeInitialPosition(Vector3 newPosition)
+        {
+            _initialPosition = newPosition;
         }
 
         public void SetSortingOrder(int sortingOrder)
@@ -121,73 +82,88 @@ namespace YoukaiFox.Parallax
             _spriteRenderer.sortingOrder = sortingOrder;
         }
 
-        public Transform GetTransform() { return _transform; }
+        public int CompareTo(ParallaxElement other)
+        {
+            if (_transform.position.z > other.transform.position.z)
+                return -1;
+            else if (_transform.position.z < other.transform.position.z)
+                return 1;
+            else
+                return 0;
+        }
 
         #endregion
 
         #region Protected methods
 
-        protected void Move(Vector3 nextPosition)
+        #region Virtual methods
+
+        protected virtual void Initialize()
         {
-            if (_lockHorizontalMovement)
-                nextPosition.x = _transform.position.x;
+            Setup();
+        }
 
-            if (_lockVerticalMovement)
-            {
-                nextPosition.y = _transform.position.y;
-            }
-            else
-            {
-                if ((_useInitialPositionAsLowestY) && (nextPosition.y < _initialPosition.y))
-                    nextPosition.y = _initialPosition.y;
-            }
-
-            if (_maintainZPosition)
-                nextPosition.z = _transform.position.z;
+        protected virtual void Move(Vector3 nextPosition)
+        {
+            if ((_preventMovingBelowInitialPos) && (nextPosition.y < _initialPosition.y))
+                nextPosition.y = _initialPosition.y;
 
             _transform.position = nextPosition;
         }
 
+        protected virtual void OnUpdateEnter() {}
+
+        protected virtual void ReferenceComponents()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _transform = transform;
+        }
+
+        protected virtual void Setup()
+        {
+            if (!_transform.parent.GetComponent<ParallaxManager>())
+            {
+                string errorMsg = "Place the object containing this elements as a child of a Parallax Manager.";
+                Debug.LogError($"Error! Element {gameObject} is not assigned to a parallax manager! {errorMsg}");
+                throw new System.Exception();
+            }
+
+            if (!_spriteRenderer.sprite)
+            {
+                string errorMsg = "A parallax element needs a sprite to function properly.";
+                Debug.LogError($"Error! The Sprite Renderer of {gameObject} is missing the Sprite! {errorMsg}");
+                throw new System.Exception();
+            }
+
+            if (_transform.position.z == 0f)
+            {
+                string errorMsg = "\nA parallax element must have a value other than zero on the Z axis.";
+                errorMsg += "\nSet a value greater than zero for background elements ";
+                errorMsg += "and lesser than zero for foreground elements.";
+                Debug.LogError($"Error! The element {gameObject} Z axis value is zero! {errorMsg}");
+                throw new System.Exception();
+            }
+
+            _initialPosition = _transform.position;
+        }
+
+        protected virtual void OnLateUpdateEnter()
+        {
+            Vector3 nextPosition = CalculateNextPosition();
+            Move(nextPosition);
+        }
+
         #endregion
 
-        #region Private Methods
+        #region Abstract methods
 
-        private void CalculateSpeed()
-        {
-            if (_transform.position.z == 0)
-            {
-                print($"The {gameObject} has position of zero in the Z axis, please change this value.");
-                return;
-            }
+        protected abstract Vector3 CalculateNextPosition();
 
-            _speed = Mathf.Abs(1f / _transform.position.z);
-        }
+        #endregion 
 
-        private void UpdateSpeed()
-        {
-            if ((!_updateSpeedInPlayMode) || (!_debugMode))
-                return;
+        #endregion
 
-            if (_transform.position.z == _previousZValue)
-                return;
-
-            CalculateSpeed();
-            _previousZValue = _transform.position.z;
-        }
-
-        private void MoveParallax()
-        {
-            if (_hardFollow)
-            {
-                Move(_transform.position + _parallaxManager.CurrentCameraDisplacement);
-            }
-            else
-            {
-                Move(_transform.position - _parallaxManager.CurrentCameraDisplacement * _speed);
-            }
-        }
-
+        #region Private methods
         #endregion
     }
-
 }
