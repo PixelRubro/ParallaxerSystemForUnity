@@ -29,7 +29,7 @@ namespace YoukaiFox.Parallax
         private Vector3 _currentCameraDisplacement;
         private Direction.Directions _cameraMovementDirection;
         private float _lowestZvalueAvailable;
-        private int _highestSortingOrder;
+        private int _centralSortOrderIndex;
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace YoukaiFox.Parallax
         public Vector3 CurrentCameraPosition => _currentCameraPosition;
         public Vector3 CurrentCameraDisplacement => _currentCameraDisplacement;
         public Direction.Directions MovementDirection => _cameraMovementDirection;
-        public int HighestSortingOrder => _highestSortingOrder;
+        public int CentralSortOrderIndex => _centralSortOrderIndex;
 
         #endregion
 
@@ -98,14 +98,14 @@ namespace YoukaiFox.Parallax
             {
                 if (_parallaxElements[i].GetPlane() == ParallaxLayeredElement.Plane.Background)
                 {
-                    _highestSortingOrder = i + 1;
+                    _centralSortOrderIndex = i + 1;
                 }
                 else
                 {
                     if (!foundCentralSortIndex)
                     {
                         foundCentralSortIndex = true;
-                        _highestSortingOrder = ++i;
+                        _centralSortOrderIndex = ++i;
                     }
                 }
 
