@@ -15,6 +15,16 @@ namespace YoukaiFox.Parallax
 
         #region Serialized Fields
 
+        [SerializeField]
+        private SortingMethod _sortingMethod;
+
+        [SerializeField]
+        private int _reservedIndicesQnty = 3;
+
+        [SerializeField] [ShowIf(nameof(UseZAxisSorting), true)]
+        private int _backgroundSortingIndex = 0;
+
+        [BeginGroup("Parallax elements")] [EndGroup]
         [SerializeField] [ReorderableList] [ReadOnlyField]
         private List<ParallaxElement> _parallaxElements;
 
@@ -29,7 +39,7 @@ namespace YoukaiFox.Parallax
         private Vector3 _currentCameraDisplacement;
         private Direction.Directions _cameraMovementDirection;
         private float _lowestZvalueAvailable;
-        private int _centralSortOrderIndex;
+        private int _reservedSortOrderIndex;
 
         #endregion
 
@@ -38,8 +48,18 @@ namespace YoukaiFox.Parallax
         public Vector3 CurrentCameraPosition => _currentCameraPosition;
         public Vector3 CurrentCameraDisplacement => _currentCameraDisplacement;
         public Direction.Directions MovementDirection => _cameraMovementDirection;
-        public int CentralSortOrderIndex => _centralSortOrderIndex;
+        public int ReservedSortOrderIndex => _reservedSortOrderIndex;
+        private bool UseSpriteSorting => _sortingMethod == SortingMethod.SpriteSorting;
+        private bool UseZAxisSorting => _sortingMethod == SortingMethod.ZAxis;
 
+        #endregion
+
+        #region Custom structures
+
+        public enum SortingMethod
+        {
+            ZAxis, SpriteSorting
+        }
         #endregion
 
         #region Unity Methods
@@ -92,25 +112,57 @@ namespace YoukaiFox.Parallax
 
         private void ConfigureSortingOrder()
         {
-            bool foundCentralSortIndex = false;
+            switch (_sortingMethod)
+            {
+                case SortingMethod.ZAxis:
+                    ConfigureZAxisSorting();
+                    break;
+                case SortingMethod.SpriteSorting:
+                    ConfigureSpriteSorting();
+                    break;
+                default:
+                    throw new System.Exception();
+            }
+        }
 
-            for (int i = 0; i < _parallaxElements.Count; i++)
+        private void ConfigureSpriteSorting()
+        {
+            bool finishedReadingBgElements = false;
+
+            for (int i = 0; i < _parallaxElements.Count + _reservedIndicesQnty; i++)
             {
                 if (_parallaxElements[i].GetPlane() == ParallaxLayeredElement.Plane.Background)
                 {
-                    _centralSortOrderIndex = i + 1;
+                    _reservedSortOrderIndex = i + 1;
                 }
                 else
                 {
-                    if (!foundCentralSortIndex)
+                    if (!finishedReadingBgElements)
                     {
-                        foundCentralSortIndex = true;
-                        _centralSortOrderIndex = ++i;
+                        finishedReadingBgElements = true;
+                        _reservedSortOrderIndex = i;
+                        i += _reservedIndicesQnty;
                     }
                 }
 
+                if ((!finishedReadingBgElements) && (i >= _parallaxElements.Count))
+                    return;
+
                 _parallaxElements[i].SetSortingOrder(i);
             }
+        }
+
+        private void ConfigureZAxisSorting()
+        {
+            foreach (var element in _parallaxElements)
+            {
+                if (element.GetPlane() == ParallaxLayeredElement.Plane.Background)
+                    element.SetSortingOrder(_backgroundSortingIndex);
+                else
+                    element.SetSortingOrder(_backgroundSortingIndex + _reservedSortOrderIndex);
+            }
+
+            _reservedSortOrderIndex = _backgroundSortingIndex + 1;
         }
 
         private void UpdateCameraPosition()
