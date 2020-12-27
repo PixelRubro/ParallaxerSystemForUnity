@@ -21,8 +21,8 @@ namespace YoukaiFox.Parallax
         [SerializeField]
         private int _reservedIndicesQnty = 3;
 
-        [SerializeField] [ShowIf(nameof(UseZAxisSorting), true)]
-        private int _backgroundSortingIndex = 0;
+        [SerializeField] [HideIf(nameof(UseSpriteSorting), true)]
+        private int _initialSortingIndex = 0;
 
         [BeginGroup("Parallax elements")] [EndGroup]
         [SerializeField] [ReorderableList] [ReadOnlyField]
@@ -157,12 +157,12 @@ namespace YoukaiFox.Parallax
             foreach (var element in _parallaxElements)
             {
                 if (element.GetPlane() == ParallaxLayeredElement.Plane.Background)
-                    element.SetSortingOrder(_backgroundSortingIndex);
+                    element.SetSortingOrder(_initialSortingIndex);
                 else
-                    element.SetSortingOrder(_backgroundSortingIndex + _reservedSortOrderIndex);
+                    element.SetSortingOrder(_initialSortingIndex + _reservedSortOrderIndex);
             }
 
-            _reservedSortOrderIndex = _backgroundSortingIndex + 1;
+            _reservedSortOrderIndex = _initialSortingIndex + 1;
         }
 
         private void UpdateCameraPosition()
