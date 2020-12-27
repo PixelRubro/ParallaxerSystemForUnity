@@ -72,6 +72,7 @@ namespace YoukaiFox.Parallax
 
         private void Start()
         {
+            AddChildrenElements();
             SortChildrenElements();
             ConfigureSortingOrder();
             _previousCameraPosition = _mainCameraTransform.position;
@@ -104,6 +105,19 @@ namespace YoukaiFox.Parallax
         #endregion
 
         #region Private Methods
+
+        private void AddChildrenElements()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                var element = transform.GetChild(i).GetComponent<ParallaxElement>();
+
+                if (element)
+                    _parallaxElements.Add(element);
+                else
+                    transform.GetChild(i).SetParent(null, false);
+            }
+        }
 
         private void SortChildrenElements()
         {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using YoukaiFox.Math;
 
 namespace YoukaiFox.Parallax
@@ -21,16 +19,17 @@ namespace YoukaiFox.Parallax
         [SerializeField] [BeginGroup("Values")] [EndGroup]
         private Plane _plane;
 
-        [SerializeField] [BeginGroup("Debug")] [LeftToggle] [EndGroup]
+        [SerializeField] [BeginGroup("Debug")] [LeftToggle]
         private bool _debugMode = false;
 
-        [SerializeField] [ShowIf(nameof(_debugMode), true)] [LeftToggle]
+        [SerializeField] [ShowIf(nameof(_debugMode), true)] [LeftToggle] 
         private bool _updateSpeedInPlayMode;
+
         #endregion
 
         #region Non-serialized fields
 
-        [ReadOnlyField] [ShowIf(nameof(_debugMode), true)] [Label("Parallax speed")]
+        [ReadOnlyField] [ShowIf(nameof(_debugMode), true)] [SerializeField] [EndGroup]
         private float _parallaxSpeed = 1f;
 
         #endregion
@@ -55,6 +54,14 @@ namespace YoukaiFox.Parallax
         #endregion
 
         #region Public methods
+
+        public void SetMovementConstraints(bool horizontal, bool vertical, bool zAxis)
+        {
+            _preventHorizontalMovement = horizontal;
+            _preventVerticalMovement = vertical;
+            _preventMovementOnZAxis = zAxis;
+        }
+
         #endregion
 
         #region Protected methods
@@ -98,10 +105,9 @@ namespace YoukaiFox.Parallax
             switch (_plane)
             {
                 case Plane.Background:
-                    return YoukaiMath.Abs(1f / base.Transform.position.z);
+                    return GetBackgroundSpeed();
                 case Plane.Foreground:
-                    float lowestZavailable = ParallaxManager.Instance.GetLowestZAxisValueAvailable();
-                    return YoukaiMath.Abs((base.Transform.position.z) / lowestZavailable);
+                    return GetForegroundSpeed();
                 default:
                     throw new System.ArgumentOutOfRangeException();
             }
@@ -114,6 +120,21 @@ namespace YoukaiFox.Parallax
 
             if (!_updateSpeedInPlayMode)
                 _parallaxSpeed = CalculateSpeed();
+        }
+
+        private float GetBackgroundSpeed()
+        {
+            return YoukaiMath.Abs(1f / base.Transform.position.z);
+        }
+
+        private float GetForegroundSpeed()
+        {
+            float lowestZavailable = ParallaxManager.Instance.GetLowestZAxisValueAvailable();
+
+            if (lowestZavailable == 0)
+                lowestZavailable = 1;
+
+            return YoukaiMath.Abs((base.Transform.position.z) / lowestZavailable);
         }
 
         #endregion

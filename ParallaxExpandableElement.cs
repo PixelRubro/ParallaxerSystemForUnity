@@ -51,20 +51,24 @@ namespace YoukaiFox.Parallax
             base.Initialize();
             CreateCopies();
             PlaceChildrenCopies();
+            AdjustAdditionalSettings();
         }
 
         protected override void OnLateUpdateEnter()
         {
-            CheckDisplacement();
+            CheckFrameExiting();
             base.OnLateUpdateEnter();
         }
 
         protected override Vector3 CalculateNextPosition()
         {
             if (!ParallaxManager.Instance)
-                return Vector3.zero;
+                throw new System.Exception();
 
-            return base.Transform.position - ParallaxManager.Instance.CurrentCameraDisplacement * ParallaxSpeed;
+            if (ElementPlane == Plane.Background)
+                return base.Transform.position - ParallaxManager.Instance.CurrentCameraDisplacement * ParallaxSpeed;
+            else
+                return base.Transform.position + ParallaxManager.Instance.CurrentCameraDisplacement * ParallaxSpeed;
         }
 
         #endregion
@@ -73,32 +77,46 @@ namespace YoukaiFox.Parallax
 
         #region Private methods
 
-        private void CheckDisplacement()
+        private void CheckFrameExiting()
         {
             if (!ParallaxManager.Instance)
+                throw new System.Exception();
+
+            Direction.Directions direction = GetParallaxDirection();
+
+            if ((direction != Direction.Directions.Right) && (direction != Direction.Directions.Left))
                 return;
 
+            float currentDistance = GetDistanceToExitParallax(direction);
+
+            if (YoukaiMath.Abs(currentDistance) <= _parallaxExitDistance)
+                RotateCopies(direction);
+        }
+
+        private Direction.Directions GetParallaxDirection()
+        {
             Direction.Directions direction = ParallaxManager.Instance.MovementDirection;
 
-            if (direction == Direction.Directions.None)
-                return;
+            if (ElementPlane == Plane.Foreground)
+                return Direction.FlipDirection(direction);
 
+            return direction;
+        }
+
+        private float GetDistanceToExitParallax(Direction.Directions direction)
+        {
             Bounds cameraBounds = ParallaxManager.Instance.GetCameraBounds();
-            float currentDistance = 0f;
 
             if (direction == Direction.Directions.Right)
             {
-                currentDistance = _copies[(int) Position.Right].bounds.max.x - cameraBounds.max.x;
+                return _copies[(int) Position.Right].bounds.max.x - cameraBounds.max.x;
             }
             else if (direction == Direction.Directions.Left)
             {
-                currentDistance = _copies[(int) Position.Left].bounds.min.x - cameraBounds.min.x;
+                return _copies[(int) Position.Left].bounds.min.x - cameraBounds.min.x;
             }
 
-            if (YoukaiMath.Abs(currentDistance) <= _parallaxExitDistance)
-            {
-                RotateCopies(direction);
-            }
+            return 0f;
         }
 
         private void CreateCopies()
@@ -167,6 +185,12 @@ namespace YoukaiFox.Parallax
                 _copies[(int) Position.Central] = _copies[(int) Position.Left];
                 _copies[(int) Position.Left] = extendedSprite;
             }
+        }
+
+        private void AdjustAdditionalSettings()
+        {
+            if (ElementPlane == Plane.Foreground)
+                SetMovementConstraints(false, true, true);
         }
 
         #endregion
