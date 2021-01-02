@@ -19,7 +19,6 @@ namespace YoukaiFox.Parallax
         private SpriteRenderer[] _copies;
         private float _boundsSizeX;
 
-
         #endregion
 
         #region Constant fields
@@ -80,7 +79,7 @@ namespace YoukaiFox.Parallax
         private void CheckFrameExiting()
         {
             if (!ParallaxManager.Instance)
-                throw new System.Exception();
+                return;
 
             Direction.Directions direction = GetParallaxDirection();
 
