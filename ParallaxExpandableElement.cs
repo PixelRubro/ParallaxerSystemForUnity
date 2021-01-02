@@ -50,7 +50,6 @@ namespace YoukaiFox.Parallax
             base.Initialize();
             CreateCopies();
             PlaceChildrenCopies();
-            AdjustAdditionalSettings();
         }
 
         protected override void OnLateUpdateEnter()
@@ -64,10 +63,9 @@ namespace YoukaiFox.Parallax
             if (!ParallaxManager.Instance)
                 throw new System.Exception();
 
-            if (ElementPlane == Plane.Background)
-                return base.Transform.position - ParallaxManager.Instance.CurrentCameraDisplacement * ParallaxSpeed;
-            else
-                return base.Transform.position + ParallaxManager.Instance.CurrentCameraDisplacement * ParallaxSpeed;
+            Vector3 displacement = ParallaxManager.Instance.CurrentCameraDisplacement * ParallaxSpeed;
+
+            return base.Transform.position - displacement;
         }
 
         #endregion
@@ -81,7 +79,7 @@ namespace YoukaiFox.Parallax
             if (!ParallaxManager.Instance)
                 return;
 
-            Direction.Directions direction = GetParallaxDirection();
+            Direction.Directions direction = ParallaxManager.Instance.MovementDirection;
 
             if ((direction != Direction.Directions.Right) && (direction != Direction.Directions.Left))
                 return;
@@ -90,16 +88,6 @@ namespace YoukaiFox.Parallax
 
             if (YoukaiMath.Abs(currentDistance) <= _parallaxExitDistance)
                 RotateCopies(direction);
-        }
-
-        private Direction.Directions GetParallaxDirection()
-        {
-            Direction.Directions direction = ParallaxManager.Instance.MovementDirection;
-
-            if (ElementPlane == Plane.Foreground)
-                return Direction.FlipDirection(direction);
-
-            return direction;
         }
 
         private float GetDistanceToExitParallax(Direction.Directions direction)
@@ -184,12 +172,6 @@ namespace YoukaiFox.Parallax
                 _copies[(int) Position.Central] = _copies[(int) Position.Left];
                 _copies[(int) Position.Left] = extendedSprite;
             }
-        }
-
-        private void AdjustAdditionalSettings()
-        {
-            if (ElementPlane == Plane.Foreground)
-                SetMovementConstraints(false, true, true);
         }
 
         #endregion
