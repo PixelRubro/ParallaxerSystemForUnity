@@ -96,6 +96,12 @@ namespace YoukaiFox.Parallax
 
         #region Protected methods
 
+        #region Abstract methods
+
+        protected abstract Vector3 CalculateNextPosition();
+
+        #endregion 
+
         #region Virtual methods
 
         protected virtual void Initialize()
@@ -154,12 +160,6 @@ namespace YoukaiFox.Parallax
         }
 
         #endregion
-
-        #region Abstract methods
-
-        protected abstract Vector3 CalculateNextPosition();
-
-        #endregion 
 
         #endregion
 

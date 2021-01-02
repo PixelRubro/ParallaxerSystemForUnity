@@ -60,12 +60,7 @@ namespace YoukaiFox.Parallax
 
         protected override Vector3 CalculateNextPosition()
         {
-            if (!ParallaxManager.Instance)
-                return Vector3.zero;
-
-            Vector3 displacement = ParallaxManager.Instance.CurrentCameraDisplacement * ParallaxSpeed;
-
-            return base.Transform.position - displacement;
+            return GetParallaxMovement();
         }
 
         #endregion

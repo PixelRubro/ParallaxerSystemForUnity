@@ -95,6 +95,15 @@ namespace YoukaiFox.Parallax
         }
 
         #endregion
+
+        protected Vector3 GetParallaxMovement()
+        {   
+            if (!ParallaxManager.Instance)
+                return Vector3.zero;
+
+            Vector3 displacement = ParallaxManager.Instance.CurrentCameraDisplacement * _parallaxSpeed;
+            return base.Transform.position - displacement;
+        }
         
         #endregion
 
