@@ -118,7 +118,7 @@ namespace YoukaiFox.Parallax
             if (!_debugMode)
                 return;
 
-            if (!_updateSpeedInPlayMode)
+            if (_updateSpeedInPlayMode)
                 _parallaxSpeed = CalculateSpeed();
         }
 
