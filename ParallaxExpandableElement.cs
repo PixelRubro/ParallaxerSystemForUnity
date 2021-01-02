@@ -61,7 +61,7 @@ namespace YoukaiFox.Parallax
         protected override Vector3 CalculateNextPosition()
         {
             if (!ParallaxManager.Instance)
-                throw new System.Exception();
+                return Vector3.zero;
 
             Vector3 displacement = ParallaxManager.Instance.CurrentCameraDisplacement * ParallaxSpeed;
 
