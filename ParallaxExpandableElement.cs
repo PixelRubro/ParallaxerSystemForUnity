@@ -9,7 +9,8 @@ namespace YoukaiFox.Parallax
     {
         #region Serialized fields
 
-        [SerializeField] [BeginGroup("Values")] [EndGroup]
+        [SerializeField] 
+        // [BeginGroup("Values")] [EndGroup]
         private float _parallaxExitDistance = 1.5f;
 
         #endregion

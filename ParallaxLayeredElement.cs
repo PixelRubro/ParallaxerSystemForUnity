@@ -7,29 +7,36 @@ namespace YoukaiFox.Parallax
     {
         #region Serialized fields
 
-        [SerializeField] [LeftToggle] [BeginGroup("Constraints")]
+        [SerializeField] 
+        // [LeftToggle] [BeginGroup("Constraints")]
         private bool _preventHorizontalMovement = false;
 
-        [SerializeField] [LeftToggle] 
+        [SerializeField] 
+        // [LeftToggle] 
         private bool _preventVerticalMovement = false;
 
-        [SerializeField] [LeftToggle] [EndGroup]
+        [SerializeField] 
+        // [LeftToggle] [EndGroup]
         private bool _preventMovementOnZAxis = true;
 
-        [SerializeField] [BeginGroup("Values")] [EndGroup]
+        [SerializeField] 
+        // [BeginGroup("Values")] [EndGroup]
         private Plane _plane;
 
-        [SerializeField] [BeginGroup("Debug")] [LeftToggle]
+        [SerializeField] 
+        // [BeginGroup("Debug")] [LeftToggle]
         private bool _debugMode = false;
 
-        [SerializeField] [ShowIf(nameof(_debugMode), true)] [LeftToggle] 
+        [SerializeField] 
+        // [ShowIf(nameof(_debugMode), true)] [LeftToggle] 
         private bool _updateSpeedInPlayMode;
 
         #endregion
 
         #region Non-serialized fields
 
-        [ReadOnlyField] [ShowIf(nameof(_debugMode), true)] [SerializeField] [EndGroup]
+        [SerializeField]
+        // [ReadOnlyField] [ShowIf(nameof(_debugMode), true)]  [EndGroup]
         private float _parallaxSpeed = 1f;
 
         #endregion

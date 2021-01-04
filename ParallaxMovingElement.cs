@@ -9,12 +9,17 @@ namespace YoukaiFox.Parallax
     public class ParallaxMovingElement : ParallaxLayeredElement
     {
         #region Serialized fields
-        [BeginGroup("Additional values")]
+        // [BeginGroup("Additional values")]
         [SerializeField]
         private MovingPattern _movingPattern;
 
-        [SerializeField] [ShowIf(nameof(IsRandom), false)]
+        [SerializeField] 
+        // [ShowIf(nameof(IsRandom), false)]
         private Direction.Directions _movementDirection;
+
+        [SerializeField] 
+        // [ShowIf(nameof(IsRandom), false)]
+        private Vector2 _customDirection;
 
         [SerializeField]
         private float _randomnessStrength = 0.25f;
@@ -22,7 +27,8 @@ namespace YoukaiFox.Parallax
         [SerializeField]
         private float _movementSpeed = 0.5f;
 
-        [EndGroup] [SerializeField] [LeftToggle]
+        [SerializeField]
+        // [EndGroup] [LeftToggle]
         private bool _changesPositionWhenRedrawn = false;
         #endregion
 
@@ -47,26 +53,34 @@ namespace YoukaiFox.Parallax
         #region Unity events
         #endregion
 
-        #region Virtual methods
+        #region Protected methods
+
+        #region Overridden methods
         protected override void Initialize()
         {
             base.Initialize();
             _random = new System.Random();
         }
 
+        protected override void OnLateUpdateEnter()
+        {
+            Vector3 nextPosition = CalculateNextPosition();
+            Move(nextPosition);
+        }
+
         #endregion
 
-        #region Public methods
         #endregion
 
         #region Private methods
 
-        private void FloatAround()
-        {
-            Vector3 randomDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * _randomnessStrength;
-            randomDirection += InitialPosition;
-            _floatingTween = base.Transform.DOMove(randomDirection, 101f - _movementSpeed).SetEase(Ease.InSine).OnComplete(FloatAround);
-        }
+        // private void FloatAround()
+        // {
+        //     Vector3 randomDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+        //     randomDirection = randomDirection.normalized * _randomnessStrength;
+        //     randomDirection += InitialPosition;
+        //     _floatingTween = base.Transform.DOMove(randomDirection, 101f - _movementSpeed).SetEase(Ease.InSine).OnComplete(FloatAround);
+        // }
 
         private Vector3 MoveLinearly()
         {
@@ -90,7 +104,7 @@ namespace YoukaiFox.Parallax
                     break;
             }
 
-            return base.Transform.position += displacement;
+            return displacement;
         }
 
         private Vector3 MoveRandomly()
@@ -98,7 +112,7 @@ namespace YoukaiFox.Parallax
             Vector3 randomDirection = YoukaiMath.GetRandomNormalizedVector2();
             randomDirection *= _randomnessStrength;
             randomDirection += InitialPosition;
-            return randomDirection;
+            return randomDirection * _movementSpeed * Time.deltaTime;
         }
 
         protected override Vector3 CalculateNextPosition()
@@ -106,9 +120,9 @@ namespace YoukaiFox.Parallax
             switch (_movingPattern)
             {
                 case MovingPattern.Random:
-                    return MoveRandomly();
+                    return MoveRandomly() + GetParallaxMovement();
                 case MovingPattern.Linear:
-                    return MoveLinearly();
+                    return MoveLinearly() + GetParallaxMovement();
                 default:
                     throw new System.ArgumentOutOfRangeException();
             }

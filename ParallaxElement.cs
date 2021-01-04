@@ -10,7 +10,8 @@ namespace YoukaiFox.Parallax
     {
         #region Serialized Fields
 
-        [SerializeField] [LeftToggle] [BeginGroup("Constraints")] [EndGroup]
+        [SerializeField] 
+        // [LeftToggle] [BeginGroup("Constraints")] [EndGroup]
         private bool _preventMovingBelowInitialPos = true;
 
         #endregion
@@ -113,6 +114,9 @@ namespace YoukaiFox.Parallax
         {
             if ((_preventMovingBelowInitialPos) && (nextPosition.y < _initialPosition.y))
                 nextPosition.y = _initialPosition.y;
+
+            if (nextPosition.x > 100f || nextPosition.y > 100f)
+                return;
 
             _transform.position = nextPosition;
         }

@@ -21,11 +21,13 @@ namespace YoukaiFox.Parallax
         [SerializeField]
         private int _reservedIndicesQnty = 3;
 
-        [SerializeField] [HideIf(nameof(UseSpriteSorting), true)]
+        [SerializeField] 
+        // [HideIf(nameof(UseSpriteSorting), true)]
         private int _initialSortingIndex = 0;
 
-        [BeginGroup("Parallax elements")] [EndGroup]
-        [SerializeField] [ReorderableList] [ReadOnlyField]
+        [SerializeField]
+        // [BeginGroup("Parallax elements")] [EndGroup]
+        // [ReorderableList] [ReadOnlyField]
         private List<ParallaxElement> _parallaxElements;
 
         #endregion
