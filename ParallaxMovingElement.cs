@@ -74,14 +74,6 @@ namespace YoukaiFox.Parallax
 
         #region Private methods
 
-        // private void FloatAround()
-        // {
-        //     Vector3 randomDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
-        //     randomDirection = randomDirection.normalized * _randomnessStrength;
-        //     randomDirection += InitialPosition;
-        //     _floatingTween = base.Transform.DOMove(randomDirection, 101f - _movementSpeed).SetEase(Ease.InSine).OnComplete(FloatAround);
-        // }
-
         private Vector3 MoveLinearly()
         {
             Vector3 displacement = Vector3.zero;
@@ -130,5 +122,4 @@ namespace YoukaiFox.Parallax
 
         #endregion
     }
-
 }
