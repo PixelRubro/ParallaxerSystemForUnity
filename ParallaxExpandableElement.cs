@@ -10,7 +10,6 @@ namespace YoukaiFox.Parallax
         #region Serialized fields
 
         [SerializeField] 
-        // [BeginGroup("Values")] [EndGroup]
         private float _parallaxExitDistance = 1.5f;
 
         #endregion
@@ -35,13 +34,7 @@ namespace YoukaiFox.Parallax
             Left = 0, Central = 1, Right = 2
         }
         #endregion
-
-        #region Unity events
-        #endregion
-
-        #region Public methods
-        #endregion
-
+        
         #region Protected methods
 
         #region Overridden methods

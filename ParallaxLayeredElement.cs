@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using YoukaiFox.Math;
+using YoukaiFox.Inspector;
 
 namespace YoukaiFox.Parallax
 {
@@ -8,27 +9,27 @@ namespace YoukaiFox.Parallax
         #region Serialized fields
 
         [SerializeField] 
-        // [LeftToggle] [BeginGroup("Constraints")]
+        [LeftToggle]
         private bool _preventHorizontalMovement = false;
 
         [SerializeField] 
-        // [LeftToggle] 
+        [LeftToggle] 
         private bool _preventVerticalMovement = false;
 
         [SerializeField] 
-        // [LeftToggle] [EndGroup]
+        [LeftToggle]
         private bool _preventMovementOnZAxis = true;
 
         [SerializeField] 
-        // [BeginGroup("Values")] [EndGroup]
         private Plane _plane;
 
         [SerializeField] 
-        // [BeginGroup("Debug")] [LeftToggle]
+        [LeftToggle]
         private bool _debugMode = false;
 
         [SerializeField] 
-        // [ShowIf(nameof(_debugMode), true)] [LeftToggle] 
+        [ShowIf(nameof(_debugMode), true)] 
+        [LeftToggle] 
         private bool _updateSpeedInPlayMode;
 
         #endregion
@@ -36,7 +37,8 @@ namespace YoukaiFox.Parallax
         #region Non-serialized fields
 
         [SerializeField]
-        // [ReadOnlyField] [ShowIf(nameof(_debugMode), true)]  [EndGroup]
+        [ReadOnly] 
+        [ShowIf(nameof(_debugMode))]
         private float _parallaxSpeed = 1f;
 
         #endregion
@@ -55,9 +57,6 @@ namespace YoukaiFox.Parallax
             Background, Foreground
         }
 
-        #endregion
-
-        #region Unity events
         #endregion
 
         #region Public methods

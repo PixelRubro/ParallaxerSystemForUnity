@@ -6,19 +6,8 @@ namespace YoukaiFox.Parallax
 {
     public class ParallaxStaticElement : ParallaxElement
     {
-        #region Serialized fields
-        #endregion
-
-        #region Non-serialized fields
-        #endregion
-
-        #region Unity events
-        #endregion
-
-        #region Public methods
-        #endregion
-
         #region Protected methods
+
         #region Overriden methods
         protected override Vector3 CalculateNextPosition()
         {
@@ -29,10 +18,8 @@ namespace YoukaiFox.Parallax
         }
         
         #endregion
-        #endregion
 
-        #region Private methods
-        #endregion    
+        #endregion  
     }
 
 }

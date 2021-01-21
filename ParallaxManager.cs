@@ -2,6 +2,7 @@
 using UnityEngine;
 using YoukaiFox.Math;
 using YoukaiFox.UnityExtensionMethods;
+using YoukaiFox.Inspector;
 
 namespace YoukaiFox.Parallax
 {
@@ -22,12 +23,12 @@ namespace YoukaiFox.Parallax
         private int _reservedIndicesQnty = 3;
 
         [SerializeField] 
-        // [HideIf(nameof(UseSpriteSorting), true)]
+        [HideIf(nameof(UseSpriteSorting))]
         private int _initialSortingIndex = 0;
 
         [SerializeField]
-        // [BeginGroup("Parallax elements")] [EndGroup]
-        // [ReorderableList] [ReadOnlyField]
+        // [ReorderableList] 
+        [ReadOnly]
         private List<ParallaxElement> _parallaxElements;
 
         #endregion

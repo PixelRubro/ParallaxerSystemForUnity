@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using YoukaiFox.Math;
+using YoukaiFox.Inspector;
 
 namespace YoukaiFox.Parallax
 {
@@ -11,7 +11,7 @@ namespace YoukaiFox.Parallax
         #region Serialized Fields
 
         [SerializeField] 
-        // [LeftToggle] [BeginGroup("Constraints")] [EndGroup]
+        [LeftToggle]
         private bool _preventMovingBelowInitialPos = true;
 
         #endregion

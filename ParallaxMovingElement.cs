@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using YoukaiFox.Math;
+using YoukaiFox.Inspector;
 
 namespace YoukaiFox.Parallax
 {
     public class ParallaxMovingElement : ParallaxLayeredElement
     {
         #region Serialized fields
-        // [BeginGroup("Additional values")]
+
         [SerializeField]
         private MovingPattern _movingPattern;
 
         [SerializeField] 
-        // [ShowIf(nameof(IsRandom), false)]
+        [ShowIf(nameof(IsRandom), false)]
         private Direction.Directions _movementDirection;
 
         [SerializeField] 
-        // [ShowIf(nameof(IsRandom), false)]
+        [ShowIf(nameof(IsRandom), false)]
         private Vector2 _customDirection;
 
         [SerializeField]
@@ -28,14 +29,16 @@ namespace YoukaiFox.Parallax
         private float _movementSpeed = 0.5f;
 
         [SerializeField]
-        // [EndGroup] [LeftToggle]
+        [LeftToggle]
         private bool _changesPositionWhenRedrawn = false;
+
         #endregion
 
         #region Non-serialized fields
 
         private Tween _floatingTween;
         private System.Random _random;
+        
         #endregion
 
         #region Properties
@@ -49,9 +52,6 @@ namespace YoukaiFox.Parallax
         {
             Random, Linear
         }
-
-        #region Unity events
-        #endregion
 
         #region Protected methods
 
