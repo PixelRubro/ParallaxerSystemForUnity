@@ -68,9 +68,9 @@ namespace YoukaiFox.Parallax
             if (!ParallaxManager.Instance)
                 return;
 
-            Direction.Directions direction = ParallaxManager.Instance.MovementDirection;
+            Direction.EDirection direction = ParallaxManager.Instance.MovementDirection;
 
-            if ((direction != Direction.Directions.Right) && (direction != Direction.Directions.Left))
+            if ((direction != Direction.EDirection.Right) && (direction != Direction.EDirection.Left))
                 return;
 
             float currentDistance = GetDistanceToExitParallax(direction);
@@ -79,15 +79,15 @@ namespace YoukaiFox.Parallax
                 RotateCopies(direction);
         }
 
-        private float GetDistanceToExitParallax(Direction.Directions direction)
+        private float GetDistanceToExitParallax(Direction.EDirection direction)
         {
             Bounds cameraBounds = ParallaxManager.Instance.GetCameraBounds();
 
-            if (direction == Direction.Directions.Right)
+            if (direction == Direction.EDirection.Right)
             {
                 return _copies[(int) Position.Right].bounds.max.x - cameraBounds.max.x;
             }
-            else if (direction == Direction.Directions.Left)
+            else if (direction == Direction.EDirection.Left)
             {
                 return _copies[(int) Position.Left].bounds.min.x - cameraBounds.min.x;
             }
@@ -131,11 +131,11 @@ namespace YoukaiFox.Parallax
                 _copies[(int) Position.Right].transform.localPosition.z);
         }
 
-        private void RotateCopies(Direction.Directions direction)
+        private void RotateCopies(Direction.EDirection direction)
         {
             SpriteRenderer extendedSprite = null;
 
-            if (direction == Direction.Directions.Right)
+            if (direction == Direction.EDirection.Right)
             {
                 extendedSprite = _copies[(int) Position.Left];
                 extendedSprite.transform.localPosition = new Vector3(
@@ -148,7 +148,7 @@ namespace YoukaiFox.Parallax
                 _copies[(int) Position.Central] = _copies[(int) Position.Right];
                 _copies[(int) Position.Right] = extendedSprite;
             }
-            else if (direction == Direction.Directions.Left)
+            else if (direction == Direction.EDirection.Left)
             {
                 extendedSprite = _copies[(int) Position.Right];
                 extendedSprite.transform.localPosition = new Vector3(

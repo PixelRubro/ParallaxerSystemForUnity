@@ -40,7 +40,7 @@ namespace YoukaiFox.Parallax
         private Vector3 _previousCameraPosition;
         private Vector3 _currentCameraPosition;
         private Vector3 _currentCameraDisplacement;
-        private Direction.Directions _cameraMovementDirection;
+        private Direction.EDirection _cameraMovementDirection;
         private float _lowestZvalueAvailable;
         private int _reservedSortOrderIndex;
 
@@ -50,7 +50,7 @@ namespace YoukaiFox.Parallax
 
         public Vector3 CurrentCameraPosition => _currentCameraPosition;
         public Vector3 CurrentCameraDisplacement => _currentCameraDisplacement;
-        public Direction.Directions MovementDirection => _cameraMovementDirection;
+        public Direction.EDirection MovementDirection => _cameraMovementDirection;
         public int ReservedSortOrderIndex => _reservedSortOrderIndex;
         private bool UseSpriteSorting => _sortingMethod == SortingMethod.SpriteSorting;
         private bool UseZAxisSorting => _sortingMethod == SortingMethod.ZAxis;
@@ -196,15 +196,15 @@ namespace YoukaiFox.Parallax
         {
             if (_currentCameraPosition.x > _previousCameraPosition.x)
             {
-                _cameraMovementDirection = Direction.Directions.Right;
+                _cameraMovementDirection = Direction.EDirection.Right;
             }
             else if (_currentCameraPosition.x < _previousCameraPosition.x)
             {
-                _cameraMovementDirection = Direction.Directions.Left;
+                _cameraMovementDirection = Direction.EDirection.Left;
             }
             else
             {
-                _cameraMovementDirection = Direction.Directions.None;
+                _cameraMovementDirection = Direction.EDirection.None;
             }
         }
 

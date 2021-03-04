@@ -16,7 +16,7 @@ namespace YoukaiFox.Parallax
 
         [SerializeField] 
         [ShowIf(nameof(IsRandom), false)]
-        private Direction.Directions _movementDirection;
+        private Direction.EDirection _movementDirection;
 
         [SerializeField] 
         [ShowIf(nameof(IsRandom), false)]
@@ -80,16 +80,16 @@ namespace YoukaiFox.Parallax
 
             switch (_movementDirection)
             {
-                case Direction.Directions.Right:
+                case Direction.EDirection.Right:
                     displacement.x = _movementSpeed * Time.deltaTime;
                     break;
-                case Direction.Directions.Left:
+                case Direction.EDirection.Left:
                     displacement.x = -_movementSpeed * Time.deltaTime;
                     break;
-                case Direction.Directions.Up:
+                case Direction.EDirection.Up:
                     displacement.y = _movementSpeed * Time.deltaTime;
                     break;
-                case Direction.Directions.Down:
+                case Direction.EDirection.Down:
                     displacement.y = -_movementSpeed * Time.deltaTime;
                     break;
                 default:
