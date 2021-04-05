@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using YoukaiFox.Math;
 using YoukaiFox.Inspector;
+using YoukaiFox.Parallax.Helpers;
 
 namespace YoukaiFox.Parallax
 {
@@ -16,7 +17,7 @@ namespace YoukaiFox.Parallax
 
         [SerializeField] 
         [ShowIf(nameof(IsRandom), false)]
-        private Direction.EDirection _movementDirection;
+        private EDirection _movementDirection;
 
         [SerializeField] 
         [ShowIf(nameof(IsRandom), false)]
@@ -80,16 +81,16 @@ namespace YoukaiFox.Parallax
 
             switch (_movementDirection)
             {
-                case Direction.EDirection.Right:
+                case EDirection.Right:
                     displacement.x = _movementSpeed * Time.deltaTime;
                     break;
-                case Direction.EDirection.Left:
+                case EDirection.Left:
                     displacement.x = -_movementSpeed * Time.deltaTime;
                     break;
-                case Direction.EDirection.Up:
+                case EDirection.Up:
                     displacement.y = _movementSpeed * Time.deltaTime;
                     break;
-                case Direction.EDirection.Down:
+                case EDirection.Down:
                     displacement.y = -_movementSpeed * Time.deltaTime;
                     break;
                 default:
