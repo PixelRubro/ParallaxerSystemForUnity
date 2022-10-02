@@ -1,2 +1,3 @@
-# Soft Boiled Parallax
-A parallax system for Unity.
+# Parallaxer
+
+A parallax system created to implement parallax effects in Unity projects faster.
