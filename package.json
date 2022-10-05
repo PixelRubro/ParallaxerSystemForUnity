@@ -2,7 +2,7 @@
   "name": "com.softboiledgames.parallaxer",
   "displayName": "Parallaxer",
   "description": "A package created to speed up parallax effect implementation on Unity projects.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "unity": "2019.4",
   "license": "MIT",
   "author": {

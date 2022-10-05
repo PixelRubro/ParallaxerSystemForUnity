@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SoftBoiledGames.Parallaxer.InspectorAttributes;
+using SoftBoiledGames.Parallaxer.Helpers;
 
 namespace SoftBoiledGames.Parallaxer
 {
@@ -10,9 +11,14 @@ namespace SoftBoiledGames.Parallaxer
     {
         #region Serialized Fields
 
-        [SerializeField] 
+        [SerializeField]
+        [Tooltip("Prevents the object from moving below its initial position.")]
         [LeftToggle]
-        private bool _preventMovingBelowInitialPos = true;
+        private bool _preventMovingBelowInitialPosition = true;
+
+        [SerializeField]
+        [Tooltip("The parallax moving speed depends on the plane that it is placed in.")]
+        private ParallaxPlane _plane;
 
         #endregion
 
@@ -22,14 +28,18 @@ namespace SoftBoiledGames.Parallaxer
         private Transform _transform;
         private Vector3 _initialPosition;
         private float _previousZValue;
+        private ParallaxManager _manager;
 
         #endregion
 
         #region Properties
 
-        public SpriteRenderer SpriteRenderer => _spriteRenderer;
-        public Transform Transform => _transform;
-        public Vector3 InitialPosition => _initialPosition;
+        protected SpriteRenderer SpriteRenderer => _spriteRenderer;
+        protected Transform Transform => _transform;
+        protected Vector3 InitialPosition => _initialPosition;
+        protected ParallaxPlane Plane => _plane;
+        protected ParallaxManager Manager => _manager;
+        protected bool PreventMovingBelowInitialPos => _preventMovingBelowInitialPosition;
 
         #endregion
 
@@ -45,63 +55,39 @@ namespace SoftBoiledGames.Parallaxer
             Initialize();
         }
 
-        private void Update() 
-        {
-            OnUpdateEnter();
-        }
-
-        private void LateUpdate() 
-        {
-            OnLateUpdateEnter();
-        }
-
         #endregion
 
         #region Public Methods
 
-        public ParallaxLayeredElement.Plane GetPlane()
-        {
-            if (GetComponent<ParallaxStaticElement>())
-                return ParallaxLayeredElement.Plane.Background;
+        #region Abstract
 
-            var layeredElement = GetComponent<ParallaxLayeredElement>();
+        public abstract void Move(Vector2 displacement, EDirection direction);
 
-            if (!layeredElement)
-                throw new System.Exception();
-
-            return layeredElement.ElementPlane;
-        }
+        #endregion
 
         public void ChangeInitialPosition(Vector3 newPosition)
         {
             _initialPosition = newPosition;
         }
 
-        public void SetSortingOrder(int sortingOrder)
-        {
-            if (!_spriteRenderer) return;
-            _spriteRenderer.sortingOrder = sortingOrder;
-        }
-
         public int CompareTo(ParallaxElement other)
         {
             if (_transform.position.z > other.transform.position.z)
+            {
                 return -1;
-            else if (_transform.position.z < other.transform.position.z)
+            }
+
+            if (_transform.position.z < other.transform.position.z)
+            {
                 return 1;
-            else
-                return 0;
+            }
+
+            return 0;
         }
 
         #endregion
 
         #region Protected methods
-
-        #region Abstract methods
-
-        protected abstract Vector3 CalculateNextPosition();
-
-        #endregion 
 
         #region Virtual methods
 
@@ -110,21 +96,9 @@ namespace SoftBoiledGames.Parallaxer
             Setup();
         }
 
-        protected virtual void Move(Vector3 nextPosition)
-        {
-            if ((_preventMovingBelowInitialPos) && (nextPosition.y < _initialPosition.y))
-                nextPosition.y = _initialPosition.y;
-
-            if (nextPosition.x > 100f || nextPosition.y > 100f)
-                return;
-
-            _transform.position = nextPosition;
-        }
-
-        protected virtual void OnUpdateEnter() {}
-
         protected virtual void ReferenceComponents()
         {
+            _manager = gameObject.GetComponentInAncestors<ParallaxManager>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _transform = transform;
         }
@@ -145,22 +119,7 @@ namespace SoftBoiledGames.Parallaxer
                 throw new System.Exception();
             }
 
-            if (_transform.position.z == 0f)
-            {
-                string errorMsg = "\nA parallax element must have a value other than zero on the Z axis.";
-                errorMsg += "\nSet a value greater than zero for background elements ";
-                errorMsg += "and lesser than zero for foreground elements.";
-                Debug.LogError($"Error! The element {gameObject} Z axis value is zero! {errorMsg}");
-                throw new System.Exception();
-            }
-
             _initialPosition = _transform.position;
-        }
-
-        protected virtual void OnLateUpdateEnter()
-        {
-            Vector3 nextPosition = CalculateNextPosition();
-            Move(nextPosition);
         }
 
         #endregion

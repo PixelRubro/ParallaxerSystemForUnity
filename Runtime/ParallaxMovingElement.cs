@@ -5,64 +5,53 @@ using SoftBoiledGames.Parallaxer.Helpers;
 
 namespace SoftBoiledGames.Parallaxer
 {
-    public class ParallaxMovingElement : ParallaxLayeredElement
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class ParallaxMovingElement : ParallaxElement
     {
         #region Serialized fields
 
         [SerializeField]
-        private MovingPattern _movingPattern;
-
-        [SerializeField] 
-        [InspectorAttributes.ShowIf(nameof(IsRandom), false)]
-        private EDirection _movementDirection;
-
-        [SerializeField] 
-        [InspectorAttributes.ShowIf(nameof(IsRandom), false)]
-        private Vector2 _customDirection;
-
-        [SerializeField]
-        private float _randomnessStrength = 0.25f;
-
-        [SerializeField]
         private float _movementSpeed = 0.5f;
+
+        [SerializeField] 
+        private Vector2 _movementDirection;
 
         [SerializeField]
         [InspectorAttributes.LeftToggle]
-        private bool _changesPositionWhenRedrawn = false;
+        private bool _respawnsWhenOutOfScreen = true;
 
         #endregion
 
         #region Non-serialized fields
-
-        private System.Random _random;
-        
         #endregion
 
-        #region Properties
+        #region Unity events
 
-        private bool IsLinear => _movingPattern == MovingPattern.Linear;
-        private bool IsRandom => _movingPattern == MovingPattern.Random;
-
-        #endregion
-
-        public enum MovingPattern
+        private void OnBecameInvisible()
         {
-            Random, Linear
+            Respawn();
         }
+
+        #endregion
+
+        #region Public methods
+
+        public override void Move(Vector2 displacement, EDirection direction)
+        {
+            var movement = _movementSpeed * Time.deltaTime * _movementDirection;
+            var aggregatedDisplacement = movement + displacement;
+            base.Transform.position += (Vector3) aggregatedDisplacement;
+        }
+
+        #endregion
 
         #region Protected methods
 
         #region Overridden methods
+
         protected override void Initialize()
         {
             base.Initialize();
-            _random = new System.Random();
-        }
-
-        protected override void OnLateUpdateEnter()
-        {
-            Vector3 nextPosition = CalculateNextPosition();
-            Move(nextPosition);
         }
 
         #endregion
@@ -71,49 +60,31 @@ namespace SoftBoiledGames.Parallaxer
 
         #region Private methods
 
-        private Vector3 MoveLinearly()
+        private void Respawn()
         {
-            Vector3 displacement = Vector3.zero;
-
-            switch (_movementDirection)
+            if (_respawnsWhenOutOfScreen == false)
             {
-                case EDirection.Right:
-                    displacement.x = _movementSpeed * Time.deltaTime;
-                    break;
-                case EDirection.Left:
-                    displacement.x = -_movementSpeed * Time.deltaTime;
-                    break;
-                case EDirection.Up:
-                    displacement.y = _movementSpeed * Time.deltaTime;
-                    break;
-                case EDirection.Down:
-                    displacement.y = -_movementSpeed * Time.deltaTime;
-                    break;
-                default:
-                    break;
+                return;
             }
 
-            return displacement;
-        }
-
-        private Vector3 MoveRandomly()
-        {
-            Vector3 randomDirection = MathLibrary.GetRandomNormalizedVector2();
-            randomDirection *= _randomnessStrength;
-            randomDirection += InitialPosition;
-            return randomDirection * _movementSpeed * Time.deltaTime;
-        }
-
-        protected override Vector3 CalculateNextPosition()
-        {
-            switch (_movingPattern)
+            if (Manager == null)
             {
-                case MovingPattern.Random:
-                    return MoveRandomly() + GetParallaxMovement();
-                case MovingPattern.Linear:
-                    return MoveLinearly() + GetParallaxMovement();
-                default:
-                    throw new System.ArgumentOutOfRangeException();
+                return;
+            }
+
+            var spriteWidth = base.SpriteRenderer.bounds.size.x;
+            
+            if (_movementDirection.x > 0f)
+            {
+                var leftmostPoint = Manager.CameraLeftmostHorizontalPoint;
+                var newPosition = new Vector2(leftmostPoint + -spriteWidth, base.Transform.position.y);
+                base.Transform.position = newPosition;
+            }
+            else if (_movementDirection.x < 0f)
+            {
+                var rightmostPoint = Manager.CameraRightmostHorizontalPoint;
+                var newPosition = new Vector2(rightmostPoint + spriteWidth, base.Transform.position.y);
+                base.Transform.position = newPosition;
             }
         }
 

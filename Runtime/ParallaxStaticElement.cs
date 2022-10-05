@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoftBoiledGames.Parallaxer.Helpers;
 
 namespace SoftBoiledGames.Parallaxer
 {
@@ -9,12 +10,10 @@ namespace SoftBoiledGames.Parallaxer
         #region Protected methods
 
         #region Overriden methods
-        protected override Vector3 CalculateNextPosition()
+
+        public override void Move(Vector2 displacement, EDirection direction)
         {
-            if (!ParallaxManager.Instance)
-                return Vector3.zero;
-                
-            return base.Transform.position + ParallaxManager.Instance.CurrentCameraDisplacement;
+            base.Transform.position += (Vector3) displacement;
         }
         
         #endregion
