@@ -2,7 +2,7 @@
 
 A parallax system created to speed up parallax effects implementation in Unity projects.
 
-## How this works?
+## How does this work?
 
 The main tool in this asset is the ParallaxExpansibleElement, which will move copies of itself around
 while following the camera at a relative speed set by the player.
