@@ -81,11 +81,15 @@ namespace SoftBoiledGames.Parallaxer
             _preventVerticalMovement = vertical;
         }
 
-        public override void Move(Vector2 displacement, EDirection direction)
+        #endregion
+
+        #region Internal methods
+
+        internal override void Move(Vector2 displacement, EDirection direction)
         {
             CheckCameraPosition(displacement, direction);
             var targetPosition = base.Transform.position;
-            
+
             if (Plane == ParallaxPlane.Background)
             {
                 var speed = _cachedBackgroundSpeed;

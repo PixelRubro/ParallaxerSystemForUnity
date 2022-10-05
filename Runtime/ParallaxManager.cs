@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using SoftBoiledGames.Parallaxer.InspectorAttributes;
 using SoftBoiledGames.Parallaxer.Helpers;
-using SoftBoiledGames.Parallaxer.Singleton;
 
 namespace SoftBoiledGames.Parallaxer
 {
@@ -81,9 +80,7 @@ namespace SoftBoiledGames.Parallaxer
         private void Start()
         {
             TrackChildrenParallaxElements();
-            _previousCameraPosition = _mainCameraTransform.position;
-            _currentCameraPosition = _mainCameraTransform.position;
-            _screenAspect = (float) Screen.width / (float) Screen.height;
+            SetupInitialValues();
             FindFurthestObject();
         }
 
@@ -183,6 +180,13 @@ namespace SoftBoiledGames.Parallaxer
             Vector3 boundsCenter = _targetCamera.transform.position;
             Vector3 boundsSize = new Vector3(cameraHeight * _screenAspect, cameraHeight, 0f);
             return new Bounds(boundsCenter, boundsSize);
+        }
+
+        private void SetupInitialValues()
+        {
+            _previousCameraPosition = _mainCameraTransform.position;
+            _currentCameraPosition = _mainCameraTransform.position;
+            _screenAspect = (float) Screen.width / (float) Screen.height;
         }
 
         #endregion

@@ -7,7 +7,7 @@ using SoftBoiledGames.Parallaxer.Helpers;
 namespace SoftBoiledGames.Parallaxer
 {
     [RequireComponent(typeof(SpriteRenderer))]
-    public abstract class ParallaxElement : MonoBehaviour, IComparable<ParallaxElement>
+    public abstract class ParallaxElement : MonoBehaviour
     {
         #region Serialized Fields
 
@@ -59,31 +59,16 @@ namespace SoftBoiledGames.Parallaxer
 
         #region Public Methods
 
-        #region Abstract
-
-        public abstract void Move(Vector2 displacement, EDirection direction);
-
-        #endregion
-
         public void ChangeInitialPosition(Vector3 newPosition)
         {
             _initialPosition = newPosition;
         }
 
-        public int CompareTo(ParallaxElement other)
-        {
-            if (_transform.position.z > other.transform.position.z)
-            {
-                return -1;
-            }
+        #endregion
 
-            if (_transform.position.z < other.transform.position.z)
-            {
-                return 1;
-            }
+        #region Internal methods
 
-            return 0;
-        }
+        internal abstract void Move(Vector2 displacement, EDirection direction);
 
         #endregion
 

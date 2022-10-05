@@ -34,9 +34,9 @@ namespace SoftBoiledGames.Parallaxer
 
         #endregion
 
-        #region Public methods
+        #region Internal methods
 
-        public override void Move(Vector2 displacement, EDirection direction)
+        internal override void Move(Vector2 displacement, EDirection direction)
         {
             var movement = _movementSpeed * Time.deltaTime * _movementDirection;
             var aggregatedDisplacement = movement + displacement;
