@@ -52,7 +52,7 @@ namespace SoftBoiledGames.Parallaxer
 
         private float _screenAspect;
 
-        private List<ParallaxElement> _parallaxElements;
+        private List<ParallaxElement> _parallaxElements = new List<ParallaxElement>();
 
         #endregion
 
@@ -115,7 +115,7 @@ namespace SoftBoiledGames.Parallaxer
             {
                 var element = transform.GetChild(i).GetComponent<ParallaxElement>();
 
-                if (element)
+                if (element != null)
                 {
                     _parallaxElements.Add(element);
                 }
