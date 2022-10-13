@@ -17,7 +17,9 @@ namespace SoftBoiledGames.Parallaxer
         private Vector2 _movementDirection;
 
         [SerializeField]
+#if UNITY_EDITOR
         [InspectorAttributes.LeftToggle]
+#endif
         private bool _respawnsWhenOutOfScreen = true;
 
         #endregion

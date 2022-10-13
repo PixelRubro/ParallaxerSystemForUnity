@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using SoftBoiledGames.Parallaxer.InspectorAttributes;
+#endif
 using SoftBoiledGames.Parallaxer.Helpers;
 
 namespace SoftBoiledGames.Parallaxer
@@ -13,7 +15,9 @@ namespace SoftBoiledGames.Parallaxer
 
         [SerializeField]
         [Tooltip("Prevents the object from moving below its initial position.")]
+#if UNITY_EDITOR
         [LeftToggle]
+#endif
         private bool _preventMovingBelowInitialPosition = true;
 
         [SerializeField]
