@@ -33,16 +33,8 @@ namespace SoftBoiledGames.Parallaxer
 #endif
         private bool _preventVerticalMovement = false;
 
-        [SerializeField] 
-#if UNITY_EDITOR
-        [InspectorAttributes.LeftToggle]
-#endif
         private bool _debugMode = false;
 
-        [SerializeField]
-#if UNITY_EDITOR
-        [InspectorAttributes.ShowIf(nameof(_debugMode))]
-#endif
         private float _parallaxExitDistance = 1f;
 
         #endregion
