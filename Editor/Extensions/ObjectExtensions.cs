@@ -1,4 +1,4 @@
-namespace SoftBoiledGames.Parallaxer.Extensions
+namespace PixelSpark.Parallaxer.Extensions
 {
     public static class ObjectExtensions 
     {

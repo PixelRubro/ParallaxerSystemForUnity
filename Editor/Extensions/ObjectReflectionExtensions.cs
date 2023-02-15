@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace SoftBoiledGames.Parallaxer.Extensions
+namespace PixelSpark.Parallaxer.Extensions
 {
     public static class ObjectReflectionExtensions 
     {

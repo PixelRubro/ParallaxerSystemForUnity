@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
-using SoftBoiledGames.Parallaxer.InspectorAttributes;
+using PixelSpark.Parallaxer.InspectorAttributes;
 #endif
-using SoftBoiledGames.Parallaxer.Helpers;
+using PixelSpark.Parallaxer.Helpers;
 
-namespace SoftBoiledGames.Parallaxer
+namespace PixelSpark.Parallaxer
 {
     public class ParallaxManager : MonoBehaviour
     {

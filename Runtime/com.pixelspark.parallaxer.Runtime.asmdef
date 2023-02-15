@@ -1,5 +1,5 @@
 {
-    "name": "com.softboiledgames.parallaxer.Runtime",
+    "name": "com.pixelspark.parallaxer.Runtime",
     "references": [
         "GUID:79a1fe10f4e06354dbd2dcf1bb901266"
     ],

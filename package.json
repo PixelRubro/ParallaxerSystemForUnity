@@ -1,11 +1,11 @@
 {
-  "name": "com.softboiledgames.parallaxer",
+  "name": "com.pixelspark.parallaxer",
   "displayName": "Parallaxer",
   "description": "A package created to speed up parallax effect implementation on Unity projects.",
   "version": "0.0.4",
   "unity": "2019.4",
   "license": "MIT",
   "author": {
-    "name": "Soft Boiled Games"
+    "name": "Pixel Spark Studio"
   }
 }

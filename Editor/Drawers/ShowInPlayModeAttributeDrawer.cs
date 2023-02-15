@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace SoftBoiledGames.Parallaxer.InspectorAttributes
+namespace PixelSpark.Parallaxer.InspectorAttributes
 {
     [CustomPropertyDrawer(typeof(ShowInPlayModeAttribute))]
     public class ShowInPlayModeAttributeDrawer : BasePropertyDrawer

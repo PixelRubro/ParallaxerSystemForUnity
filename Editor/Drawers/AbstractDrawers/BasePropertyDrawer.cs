@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
-using SoftBoiledGames.Parallaxer.Extensions;
+using PixelSpark.Parallaxer.Extensions;
 
-namespace SoftBoiledGames.Parallaxer.InspectorAttributes
+namespace PixelSpark.Parallaxer.InspectorAttributes
 {
     public abstract class BasePropertyDrawer: PropertyDrawer 
     {

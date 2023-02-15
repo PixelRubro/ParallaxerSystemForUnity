@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SoftBoiledGames.Parallaxer.InspectorAttributes
+namespace PixelSpark.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Prevent a serialized field from being edited in inspector.

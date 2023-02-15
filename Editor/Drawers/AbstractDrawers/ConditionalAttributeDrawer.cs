@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Reflection;
-using SoftBoiledGames.Parallaxer.Extensions;
+using PixelSpark.Parallaxer.Extensions;
 
-namespace SoftBoiledGames.Parallaxer.InspectorAttributes
+namespace PixelSpark.Parallaxer.InspectorAttributes
 {
     public abstract class ConditionalAttributeDrawer : BasePropertyDrawer
     {

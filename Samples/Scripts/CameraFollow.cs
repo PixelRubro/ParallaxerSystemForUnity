@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SoftBoiledGames.Parallaxer.Demo
+namespace PixelSpark.Parallaxer.Demo
 {
     public class CameraFollow : MonoBehaviour
     {

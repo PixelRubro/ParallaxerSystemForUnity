@@ -1,4 +1,4 @@
-﻿namespace SoftBoiledGames.Parallaxer.InspectorAttributes
+﻿namespace PixelSpark.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Shows property if provided condition is met.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SoftBoiledGames.Parallaxer.InspectorAttributes
+namespace PixelSpark.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Base class for comparison attributes.

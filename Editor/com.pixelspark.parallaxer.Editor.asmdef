@@ -1,5 +1,5 @@
 {
-    "name": "com.softboiledgames.parallaxer.Editor",
+    "name": "com.pixelspark.parallaxer.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"

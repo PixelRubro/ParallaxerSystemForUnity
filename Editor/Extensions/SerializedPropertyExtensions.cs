@@ -2,12 +2,11 @@ using UnityEditor;
 using System;
 using System.Linq;
 using System.Reflection;
-using SoftBoiledGames.Parallaxer.InspectorAttributes;
-using SoftBoiledGames.Parallaxer.InspectorAttributes.Utilities;
+using PixelSpark.Parallaxer.InspectorAttributes.Utilities;
 
 #if UNITY_EDITOR
 
-namespace SoftBoiledGames.Parallaxer.Extensions
+namespace PixelSpark.Parallaxer.Extensions
 {
     public static class SerializedPropertyExtensions
     {

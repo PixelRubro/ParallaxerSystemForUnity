@@ -5,9 +5,9 @@ using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using SoftBoiledGames.Parallaxer.Extensions;
+using PixelSpark.Parallaxer.Extensions;
 
-namespace SoftBoiledGames.Parallaxer.InspectorAttributes.Utilities
+namespace PixelSpark.Parallaxer.InspectorAttributes.Utilities
 {
     public static class EditorUtil
     {

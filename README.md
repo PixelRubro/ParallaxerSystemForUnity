@@ -15,7 +15,7 @@ A parallax system created to speed up parallax effects implementation in Unity p
 
 Add the following line to your `manifest.json` found in the "Packages" folder
 
-`    "com.softboiledgames.parallaxer": "git@github.com:SoftBoiledGames/Parallaxer.git"`
+`    "com.pixelspark.parallaxer": "git@github.com:PixelSparkStudio/Parallaxer.git"`
 
 ## How does this work?
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace SoftBoiledGames.Parallaxer.InspectorAttributes
+namespace PixelSpark.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Hide the field if it is in Play Mode.

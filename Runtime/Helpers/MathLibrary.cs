@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SoftBoiledGames.Parallaxer.Helpers
+namespace PixelSpark.Parallaxer.Helpers
 {
     public class MathLibrary : MonoBehaviour
     {

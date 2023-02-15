@@ -1,4 +1,4 @@
-namespace SoftBoiledGames.Parallaxer.InspectorAttributes
+namespace PixelSpark.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Hides property if provided condition is met.

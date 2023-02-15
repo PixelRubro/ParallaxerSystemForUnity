@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SoftBoiledGames.Parallaxer
+namespace PixelSpark.Parallaxer
 {
     public enum ParallaxPlane
     {

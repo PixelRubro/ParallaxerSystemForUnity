@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SoftBoiledGames.Parallaxer.Helpers
+namespace PixelSpark.Parallaxer.Helpers
 {
     public enum EDirection
     {

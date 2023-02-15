@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SoftBoiledGames.Parallaxer.Helpers;
+using PixelSpark.Parallaxer.Helpers;
 
-namespace SoftBoiledGames.Parallaxer
+namespace PixelSpark.Parallaxer
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class ParallaxMovingElement : ParallaxElement
