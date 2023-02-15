@@ -42,7 +42,7 @@ namespace SoftBoiledGames.Parallaxer
         {
             var movement = _movementSpeed * Time.deltaTime * _movementDirection;
             var aggregatedDisplacement = movement + displacement;
-            base.Transform.position += (Vector3) aggregatedDisplacement;
+            Transform.position += (Vector3) aggregatedDisplacement;
         }
 
         #endregion
@@ -74,18 +74,18 @@ namespace SoftBoiledGames.Parallaxer
                 return;
             }
 
-            var spriteWidth = base.SpriteRenderer.bounds.size.x;
+            var spriteWidth = SpriteRenderer.bounds.size.x;
             
             if (_movementDirection.x > 0f)
             {
                 var leftmostPoint = Manager.CameraLeftmostHorizontalPoint;
-                var newPosition = new Vector2(leftmostPoint + -spriteWidth, base.Transform.position.y);
+                var newPosition = new Vector2(leftmostPoint + -spriteWidth, Transform.position.y);
                 base.Transform.position = newPosition;
             }
             else if (_movementDirection.x < 0f)
             {
                 var rightmostPoint = Manager.CameraRightmostHorizontalPoint;
-                var newPosition = new Vector2(rightmostPoint + spriteWidth, base.Transform.position.y);
+                var newPosition = new Vector2(rightmostPoint + spriteWidth, Transform.position.y);
                 base.Transform.position = newPosition;
             }
         }

@@ -98,14 +98,14 @@ namespace SoftBoiledGames.Parallaxer
             {
                 string errorMsg = "Place the object containing this elements as a child of a Parallax Manager.";
                 Debug.LogError($"Error! Element {gameObject} is not assigned to a parallax manager! {errorMsg}");
-                throw new System.Exception();
+                throw new Exception();
             }
 
             if (!_spriteRenderer.sprite)
             {
                 string errorMsg = "A parallax element needs a sprite to function properly.";
                 Debug.LogError($"Error! The Sprite Renderer of {gameObject} is missing the Sprite! {errorMsg}");
-                throw new System.Exception();
+                throw new Exception();
             }
 
             _initialPosition = _transform.position;

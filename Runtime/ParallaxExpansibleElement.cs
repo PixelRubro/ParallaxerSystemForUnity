@@ -88,7 +88,7 @@ namespace SoftBoiledGames.Parallaxer
         internal override void Move(Vector2 displacement, EDirection direction)
         {
             CheckCameraPosition(displacement, direction);
-            var targetPosition = base.Transform.position;
+            var targetPosition = Transform.position;
 
             if (Plane == ParallaxPlane.Background)
             {
@@ -110,11 +110,11 @@ namespace SoftBoiledGames.Parallaxer
                     speed = (1f + _relativeSpeed) * -1f;
                 }
 
-                targetPosition = base.Transform.position + (Vector3) displacement * (speed + 1f);
+                targetPosition = Transform.position + (Vector3) displacement * (speed + 1f);
             }
             else if (Plane == ParallaxPlane.Midground)
             {
-                base.Transform.position += (Vector3) displacement;
+                Transform.position += (Vector3) displacement;
             }
 
             if ((PreventMovingBelowInitialPos) && (targetPosition.y < InitialPosition.y))
@@ -132,7 +132,7 @@ namespace SoftBoiledGames.Parallaxer
                 targetPosition.y = InitialPosition.y;
             }
 
-            base.Transform.position = targetPosition;
+            Transform.position = targetPosition;
         }
 
         #endregion
@@ -190,7 +190,8 @@ namespace SoftBoiledGames.Parallaxer
                 var parallaxRightMostPoint = _copies[(int) Position.Right].bounds.max.x;
                 return parallaxRightMostPoint - cameraBounds.max.x;
             }
-            else if (direction == EDirection.Left)
+            
+            if (direction == EDirection.Left)
             {
                 var parallaxLeftMostPoint = _copies[(int) Position.Left].bounds.min.x;
                 return parallaxLeftMostPoint - cameraBounds.min.x;
@@ -201,18 +202,18 @@ namespace SoftBoiledGames.Parallaxer
 
         private void CreateCopies()
         {
-            _cachedRendererWidth = base.SpriteRenderer.bounds.size.x;
-            base.SpriteRenderer.enabled = false;
+            _cachedRendererWidth = SpriteRenderer.bounds.size.x;
+            SpriteRenderer.enabled = false;
             _copies = new SpriteRenderer[CopiesQuantity];
             var dummyObject = new GameObject();
             var spriteRenderer = dummyObject.AddComponent<SpriteRenderer>();
-            spriteRenderer.sortingOrder = base.SpriteRenderer.sortingOrder;
-            spriteRenderer.sprite = base.SpriteRenderer.sprite;
-            spriteRenderer.sortingLayerID = base.SpriteRenderer.sortingLayerID;
+            spriteRenderer.sortingOrder = SpriteRenderer.sortingOrder;
+            spriteRenderer.sprite = SpriteRenderer.sprite;
+            spriteRenderer.sortingLayerID = SpriteRenderer.sortingLayerID;
 
-            for (int i = 0; i < _copies.Length; i++)
+            for (var i = 0; i < _copies.Length; i++)
             {
-                _copies[i] = Instantiate(spriteRenderer, base.transform, false);
+                _copies[i] = Instantiate(spriteRenderer, transform, false);
                 _copies[i].gameObject.name = $"Element{i}";
             }
 

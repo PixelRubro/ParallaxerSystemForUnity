@@ -11,7 +11,7 @@ namespace SoftBoiledGames.Parallaxer
 
         internal override void Move(Vector2 displacement, EDirection direction)
         {
-            base.Transform.position += (Vector3) displacement;
+            Transform.position += (Vector3) displacement;
         }
         
         #endregion  
