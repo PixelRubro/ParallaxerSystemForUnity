@@ -33,8 +33,6 @@ namespace SoftBoiledGames.Parallaxer
 #endif
         private bool _preventVerticalMovement = false;
 
-        private bool _debugMode = false;
-
         private float _parallaxExitDistance = 1f;
 
         #endregion
@@ -210,6 +208,7 @@ namespace SoftBoiledGames.Parallaxer
             var spriteRenderer = dummyObject.AddComponent<SpriteRenderer>();
             spriteRenderer.sortingOrder = base.SpriteRenderer.sortingOrder;
             spriteRenderer.sprite = base.SpriteRenderer.sprite;
+            spriteRenderer.sortingLayerID = base.SpriteRenderer.sortingLayerID;
 
             for (int i = 0; i < _copies.Length; i++)
             {
