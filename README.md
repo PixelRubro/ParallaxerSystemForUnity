@@ -9,7 +9,7 @@ A parallax system created to speed up parallax effects implementation in Unity p
 - Open the Package Manager window
 - Click on the "plus" sign
 - Select "Add package from git URL"
-- Paste this repo's SSH link (git@github.com:SoftBoiledGames/Parallaxer.git)
+- Paste this repo's SSH link (git@github.com:PixelSparkStudio/Parallaxer.git)
 
 ### Editing manifest file
 
