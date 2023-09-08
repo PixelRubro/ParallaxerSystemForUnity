@@ -5,7 +5,7 @@ namespace VermillionVanguard.Parallaxer.Extensions
 {
     public static class StringExtensions 
     {
-        // Author: Soft Boiled Games
+        // Author: Vermillion Vanguard Studio
         public static string ToTitleCase(this string self)
         {
             // Add spaces.
@@ -16,7 +16,7 @@ namespace VermillionVanguard.Parallaxer.Extensions
             return output.CapitalizeFirstLetter();
         }
 
-        // Author: Soft Boiled Games
+        // Author: Vermillion Vanguard Studio
         public static string ToSentenceCase(this string self)
         {
             // Add spaces and uncapitalize the following letter.
@@ -27,7 +27,7 @@ namespace VermillionVanguard.Parallaxer.Extensions
             return output.CapitalizeFirstLetter();
         }
 
-        // Author: Soft Boiled Games
+        // Author: Vermillion Vanguard Studio
         private static string CapitalizeFirstLetter(this string self)
         {
             if (self.Length < 2)
@@ -36,7 +36,7 @@ namespace VermillionVanguard.Parallaxer.Extensions
             return char.ToUpperInvariant(self[0]) + self.Substring(1);
         }
 
-        // Author: Soft Boiled Games
+        // Author: Vermillion Vanguard Studio
         private static string RemoveFirstUnderscore(this string self)
         {
             if (self.Length < 2)
@@ -48,7 +48,7 @@ namespace VermillionVanguard.Parallaxer.Extensions
             return self;
         }
 
-        // Author: Soft Boiled Games
+        // Author: Vermillion Vanguard Studio
         private static string ReplaceUnderscoresWithSpaces(this string self)
         {
             return self.Replace('_', ' ');
