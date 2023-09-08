@@ -1,11 +1,11 @@
 {
-  "name": "com.pixelsparkstudio.parallaxer",
+  "name": "com.vermillionvanguard.parallaxer",
   "displayName": "Parallaxer",
-  "description": "A package created to speed up parallax effect implementation on Unity projects.",
+  "description": "A package created to speed up parallax effect implementation in Unity projects.",
   "version": "0.0.4",
   "unity": "2019.4",
   "license": "MIT",
   "author": {
-    "name": "Pixel Spark Studio"
+    "name": "Vermillion Vanguard Studio"
   }
 }

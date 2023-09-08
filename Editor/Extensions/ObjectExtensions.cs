@@ -1,4 +1,4 @@
-namespace PixelSpark.Parallaxer.Extensions
+namespace VermillionVanguard.Parallaxer.Extensions
 {
     public static class ObjectExtensions 
     {

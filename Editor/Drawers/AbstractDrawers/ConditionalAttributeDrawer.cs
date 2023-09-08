@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Reflection;
-using PixelSpark.Parallaxer.Extensions;
+using VermillionVanguard.Parallaxer.Extensions;
 
-namespace PixelSpark.Parallaxer.InspectorAttributes
+namespace VermillionVanguard.Parallaxer.InspectorAttributes
 {
     public abstract class ConditionalAttributeDrawer : BasePropertyDrawer
     {

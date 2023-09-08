@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PixelSpark.Parallaxer.InspectorAttributes
+namespace VermillionVanguard.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Set the boolean checkbox at the left of the field's label.

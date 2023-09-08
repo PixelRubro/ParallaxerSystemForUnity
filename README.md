@@ -9,13 +9,13 @@ A parallax system created to speed up parallax effects implementation in Unity p
 - Open the Package Manager window
 - Click on the "plus" sign
 - Select "Add package from git URL"
-- Paste this repo's SSH link (git@github.com:PixelSparkStudio/Parallaxer.git)
+- Paste this repo's SSH link (<git@github.com>:VermillionVanguard/Parallaxer.git)
 
 ### Editing manifest file
 
 Add the following line to your `manifest.json` found in the "Packages" folder
 
-`    "com.pixelsparkstudio.parallaxer": "git@github.com:PixelSparkStudio/Parallaxer.git"`
+`"com.vermillionvanguard.parallaxer": "git@github.com:VermillionVanguard/Parallaxer.git"`
 
 ## How does this work?
 
@@ -46,7 +46,14 @@ The last element of this list is the static element, the ParallaxStaticElement, 
 - Then, add your parallax elements as children of the ParallaxManager object, setting the sprites sorting orders accordingly
 - Set the speed of each parallax element as you wish
 - That's it! No additional coding needed!
+  
+If you still have doubts, check the demo scene in the "Samples" folder.
+
+## Why can't I open the demo scene?
+
+This is a limitation known by the Unity team. Until they look at it, you will have to drag the scene file into somewhere in your "Assets" folder.
 
 Graphic assets made by Kenney:
-- https://kenney.nl/assets/background-elements
-- https://kenney.nl/assets/simplified-platformer-pack
+
+- <https://kenney.nl/assets/background-elements>
+- <https://kenney.nl/assets/simplified-platformer-pack>

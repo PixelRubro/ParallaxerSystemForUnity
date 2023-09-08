@@ -1,4 +1,4 @@
-﻿namespace PixelSpark.Parallaxer.InspectorAttributes
+﻿namespace VermillionVanguard.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Shows property if provided condition is met.

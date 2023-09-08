@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using System;
 
-namespace PixelSpark.Parallaxer.Extensions
+namespace VermillionVanguard.Parallaxer.Extensions
 {
     public static class StringExtensions 
     {

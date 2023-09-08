@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using PixelSpark.Parallaxer.Helpers;
+﻿using UnityEngine;
+using VermillionVanguard.Parallaxer.Helpers;
 
-namespace PixelSpark.Parallaxer
+namespace VermillionVanguard.Parallaxer
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class ParallaxMovingElement : ParallaxElement

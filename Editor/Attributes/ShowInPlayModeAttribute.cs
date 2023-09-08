@@ -4,7 +4,7 @@ using UnityEngine;
 
 using System;
 
-namespace PixelSpark.Parallaxer.InspectorAttributes
+namespace VermillionVanguard.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Show the field only if it is in Play Mode.

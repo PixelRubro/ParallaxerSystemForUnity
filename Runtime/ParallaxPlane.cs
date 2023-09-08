@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace PixelSpark.Parallaxer
+﻿namespace VermillionVanguard.Parallaxer
 {
     public enum ParallaxPlane
     {

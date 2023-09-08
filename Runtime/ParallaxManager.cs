@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
-using PixelSpark.Parallaxer.InspectorAttributes;
+using VermillionVanguard.Parallaxer.InspectorAttributes;
 #endif
-using PixelSpark.Parallaxer.Helpers;
+using VermillionVanguard.Parallaxer.Helpers;
 
-namespace PixelSpark.Parallaxer
+namespace VermillionVanguard.Parallaxer
 {
     public class ParallaxManager : MonoBehaviour
     {

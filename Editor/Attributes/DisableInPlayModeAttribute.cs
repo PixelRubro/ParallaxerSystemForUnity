@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PixelSpark.Parallaxer.InspectorAttributes
+namespace VermillionVanguard.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Make the field read-only when the editor is in play mode.

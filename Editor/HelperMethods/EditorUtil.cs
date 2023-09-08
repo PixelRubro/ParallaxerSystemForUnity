@@ -5,9 +5,9 @@ using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using PixelSpark.Parallaxer.Extensions;
+using VermillionVanguard.Parallaxer.Extensions;
 
-namespace PixelSpark.Parallaxer.InspectorAttributes.Utilities
+namespace VermillionVanguard.Parallaxer.InspectorAttributes.Utilities
 {
     public static class EditorUtil
     {
