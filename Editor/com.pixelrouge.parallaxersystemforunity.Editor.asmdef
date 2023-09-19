@@ -1,5 +1,5 @@
 {
-    "name": "com.pixelspark.parallaxer.Editor",
+    "name": "com.pixelrouge.parallaxersystemforunity.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"
