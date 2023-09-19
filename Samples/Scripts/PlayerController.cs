@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VermillionVanguard.Parallaxer.Demo
+namespace PixelRouge.Parallaxer.Demo
 {
     public class PlayerController : MonoBehaviour
     {

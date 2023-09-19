@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes
+namespace PixelRouge.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Make the field read-only when the editor is in play mode.

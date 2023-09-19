@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes
+namespace PixelRouge.Parallaxer.InspectorAttributes
 {
     [CustomPropertyDrawer(typeof(ShowIfAttribute))]
     public class ShowIfAttributeDrawer : ConditionalAttributeDrawer

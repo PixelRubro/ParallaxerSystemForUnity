@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes
+namespace PixelRouge.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Prevent a serialized field from being edited in inspector.

@@ -1,6 +1,6 @@
 using System;
 
-namespace VermillionVanguard.Parallaxer.Extensions
+namespace PixelRouge.Parallaxer.Extensions
 {
     public static class SystemTypeExtensions 
     {

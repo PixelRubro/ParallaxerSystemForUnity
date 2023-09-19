@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes.Utilities
+namespace PixelRouge.Parallaxer.InspectorAttributes.Utilities
 {
     public class HelperMethods 
     {

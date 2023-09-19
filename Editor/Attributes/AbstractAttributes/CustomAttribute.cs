@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes
+namespace PixelRouge.Parallaxer.InspectorAttributes
 {
     [System.AttributeUsage(System.AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     public abstract class CustomAttribute : PropertyAttribute

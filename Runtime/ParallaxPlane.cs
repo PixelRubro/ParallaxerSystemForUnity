@@ -1,4 +1,4 @@
-﻿namespace VermillionVanguard.Parallaxer
+﻿namespace PixelRouge.Parallaxer
 {
     public enum ParallaxPlane
     {

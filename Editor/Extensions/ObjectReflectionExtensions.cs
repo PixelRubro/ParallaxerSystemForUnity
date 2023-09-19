@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace VermillionVanguard.Parallaxer.Extensions
+namespace PixelRouge.Parallaxer.Extensions
 {
     public static class ObjectReflectionExtensions 
     {

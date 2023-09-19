@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VermillionVanguard.Parallaxer.Helpers
+namespace PixelRouge.Parallaxer.Helpers
 {
     public class MathLibrary : MonoBehaviour
     {

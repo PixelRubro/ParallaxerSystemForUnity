@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VermillionVanguard.Parallaxer.Helpers
+namespace PixelRouge.Parallaxer.Helpers
 {
     public enum EDirection
     {

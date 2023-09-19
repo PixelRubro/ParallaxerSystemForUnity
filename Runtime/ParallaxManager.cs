@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
-using VermillionVanguard.Parallaxer.InspectorAttributes;
+using PixelRouge.Parallaxer.InspectorAttributes;
 #endif
-using VermillionVanguard.Parallaxer.Helpers;
+using PixelRouge.Parallaxer.Helpers;
 
-namespace VermillionVanguard.Parallaxer
+namespace PixelRouge.Parallaxer
 {
     public class ParallaxManager : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes
+namespace PixelRouge.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Hide the field if it is in Play Mode.

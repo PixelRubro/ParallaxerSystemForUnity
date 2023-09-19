@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes
+namespace PixelRouge.Parallaxer.InspectorAttributes
 {
     /// <summary>
     /// Base class for comparison attributes.

@@ -2,11 +2,11 @@ using UnityEditor;
 using System;
 using System.Linq;
 using System.Reflection;
-using VermillionVanguard.Parallaxer.InspectorAttributes.Utilities;
+using PixelRouge.Parallaxer.InspectorAttributes.Utilities;
 
 #if UNITY_EDITOR
 
-namespace VermillionVanguard.Parallaxer.Extensions
+namespace PixelRouge.Parallaxer.Extensions
 {
     public static class SerializedPropertyExtensions
     {

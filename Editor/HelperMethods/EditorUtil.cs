@@ -5,9 +5,9 @@ using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using VermillionVanguard.Parallaxer.Extensions;
+using PixelRouge.Parallaxer.Extensions;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes.Utilities
+namespace PixelRouge.Parallaxer.InspectorAttributes.Utilities
 {
     public static class EditorUtil
     {

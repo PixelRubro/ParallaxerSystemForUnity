@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System;
-using VermillionVanguard.Parallaxer.Extensions;
+using PixelRouge.Parallaxer.Extensions;
 
-namespace VermillionVanguard.Parallaxer.InspectorAttributes
+namespace PixelRouge.Parallaxer.InspectorAttributes
 {
     public abstract class BasePropertyDrawer: PropertyDrawer 
     {

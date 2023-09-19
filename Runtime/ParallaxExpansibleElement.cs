@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using VermillionVanguard.Parallaxer.Helpers;
+using PixelRouge.Parallaxer.Helpers;
 
-namespace VermillionVanguard.Parallaxer
+namespace PixelRouge.Parallaxer
 {
     public class ParallaxExpansibleElement : ParallaxElement
     {

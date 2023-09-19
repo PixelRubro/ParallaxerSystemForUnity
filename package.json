@@ -1,11 +1,11 @@
 {
-  "name": "com.vermillionvanguard.parallaxer",
-  "displayName": "Parallaxer",
+  "name": "com.pixelrouge.parallaxersystemforunity",
+  "displayName": "Parallaxer System for Unity",
   "description": "A package created to speed up parallax effect implementation in Unity projects.",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "unity": "2019.4",
   "license": "MIT",
   "author": {
-    "name": "Vermillion Vanguard Studio"
+    "name": "Pixel Rouge Studio"
   }
 }
