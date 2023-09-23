@@ -9,13 +9,13 @@ A parallax system created to speed up parallax effects implementation in Unity p
 - Open the Package Manager window
 - Click on the "plus" sign
 - Select "Add package from git URL"
-- Paste this repo's SSH link (<git@github.com>:PixelRouge/ParallaxerSystemForUnity.git)
+- Paste this repo's SSH link (<git@github.com>:PixelRubro/ParallaxerSystemForUnity.git)
 
 ### Editing manifest file
 
 Add the following line to your `manifest.json` found in the "Packages" folder
 
-`"com.pixelrouge.parallaxersystemforunity": "git@github.com:PixelRouge/ParallaxerSystemForUnity.git"`
+`"com.pixelrubro.parallaxersystemforunity": "git@github.com:PixelRubro/ParallaxerSystemForUnity.git"`
 
 ## How does this work?
 
