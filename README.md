@@ -15,7 +15,7 @@ A parallax system created to speed up parallax effects implementation in Unity p
 
 Add the following line to your `manifest.json` found in the "Packages" folder
 
-`"com.pixelrubro.parallaxersystemforunity": "git@github.com:PixelRubro/ParallaxerSystemForUnity.git"`
+`"com.pixelrouge.parallaxersystemforunity": "git@github.com:PixelRubro/ParallaxerSystemForUnity.git"`
 
 ## How does this work?
 
